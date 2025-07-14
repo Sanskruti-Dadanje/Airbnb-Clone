@@ -1,0 +1,88 @@
+
+
+<%layout("/layouts/boilerplate")%>
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+
+    <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" />
+    <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
+
+    
+
+  <style>
+    body {
+      font-family: 'Segoe UI', sans-serif;
+      background-color: #f7f7f7;
+      margin: 0;
+      /* padding: 20px; */
+    }
+
+    h2 {
+      text-align: center;
+      margin-bottom: 30px;
+    }
+
+    .reservation-container {
+      max-width: 800px;
+      margin: 0 auto;
+    }
+
+    .card {
+      background-color: white;
+      border-radius: 10px;
+      padding: 20px;
+      margin-bottom: 20px;
+      box-shadow: 0 4px 10px rgba(0, 0, 0, 0.05);
+    }
+
+    .card-title {
+      font-size: 20px;
+      margin-bottom: 10px;
+      color: #333;
+    }
+
+    .card p {
+      margin: 6px 0;
+      color: #555;
+    }
+
+    .no-reservations {
+      text-align: center;
+      color: #888;
+      font-size: 16px;
+    }
+  </style>
+</head>
+<body>
+  <h2>Your Trips</h2>
+
+  <div class="reservation-container">
+    <% if (reservations.length===0) { %>
+      <p class="no-reservations">You have no Trips.</p>
+    <% } else { %>
+      <% reservations.forEach(reservation => { %>
+        <div class="card">
+          <div class="card-body">
+            
+            <h5 class="card-title">
+  <%= reservation.listing ? reservation.listing.title : 'Listing not found' %>
+</h5>
+            <p><strong>Check-in:</strong> <%= reservation.checkin.toDateString() %></p>
+            <p><strong>Check-out:</strong> <%= reservation.checkout.toDateString() %></p>
+            <p><strong>Total Price:</strong> ₹<%= reservation.totalPrice %></p>
+            <form action= "/reservations/<%= reservation._id %>?_method=DELETE" method="POST">
+            <button type="submit" class="btn btn-danger">Cancel Reservation</button>
+          </form>
+          </div>
+        </div>
+      <% }) %>
+    <% } %>
+
+      
+  </div>
+</body>
+</html>

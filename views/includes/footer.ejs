@@ -1,0 +1,107 @@
+
+<style>
+    .dropdown a i{
+         margin-left:10px;
+         background-color: black;
+         color: rgb(4, 4, 4);
+    }
+
+
+    
+    #footerNavbar {
+      transition: transform 0.4s ease-in-out;
+    }
+    #footerNavbar.hide {
+      transform: translateY(100%);
+    }
+  
+
+    
+   
+</style>
+
+
+
+<footer>
+
+
+<br>
+<br><br>
+
+
+
+
+
+
+
+
+
+<div class="important">
+      <a href="/listings/new" class="btn btn-outline-secondary" style="border:none; color: black; font-weight: bold; font-size: 0.8rem;">Switch to hosting</a>
+      
+
+     
+    </div>
+    <br><br>
+
+
+
+    <div class="f-info">
+        <div class="f-info-socials">
+            <i class="fa-brands fa-facebook"></i>
+            <i class="fa-brands fa-instagram"></i>
+            <i class="fa-brands fa-linkedin"></i>
+
+        </div>
+        <div class="f-info-brand">&copy;Wanderlust Private Limited</div>
+        <div class="f-info-links">
+            <a href="/privacy">Privacy</a>
+            <a href="/terms">Terms</a>
+
+        </div>
+    </div>
+
+
+<nav id="footerNavbar" class="navbar fixed-bottom bg-white text-white p-3 text-center  d-lg-none d-md-none">
+  <div class="dropdown" >
+        
+        <% if(!currUser  ) { %>
+           
+          <a href="/login" ><i class="fa-solid fa-user-circle fa-lg"></i></a>
+          <p style="text-align:centre">Log in</p>
+          
+          <% } else { %>
+
+            <a href="/profile" style="color: black; padding: 10px;"><i class="fa-solid fa-user-circle fa-lg"></i></a>
+           <% } %>
+           
+       
+      </div>
+</nav>
+
+
+</footer>
+
+
+<script>
+  const footerNavbar = document.getElementById("footerNavbar");
+
+  window.addEventListener("scroll", () => {
+    const scrollY = window.scrollY;
+    const windowHeight = window.innerHeight;
+    const docHeight = document.documentElement.scrollHeight;
+
+    const scrollPosition = (scrollY + windowHeight) / docHeight;
+
+    if (scrollPosition < 0.3) {
+      // Top section → show
+      footerNavbar.classList.remove('hide');
+    } else if (scrollPosition > 0.85) {
+      // Near bottom → show
+      footerNavbar.classList.remove('hide');
+    } else {
+      // Middle → hide
+      footerNavbar.classList.add('hide');
+    }
+  });
+</script>

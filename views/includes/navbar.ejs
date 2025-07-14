@@ -1,0 +1,129 @@
+<style>
+/* Container for the whole search bar */
+.airbnb-search-form {
+  display: flex;
+  align-items: center;
+  background: #fff;
+  border-radius: 50px;
+  padding: 10px 20px;
+  box-shadow: 0 1px 2px rgba(0,0,0,0.08), 0 4px 12px rgba(0,0,0,0.05);
+  max-width: 800px;
+  width: 90%;    /* same big width as 4-section style */
+  margin: 20px auto;
+  overflow: hidden;
+}
+
+/* Single destination input */
+.search-inp {
+  border: none;
+  outline: none;
+  font-size: 1rem;
+  padding: 12px 20px;
+  flex: 1 1 auto;
+  border-radius: 50px;
+  min-width: 0;   
+}
+
+/* Search button */
+.btn-search {
+  flex-shrink: 0;  
+  background-color: #ff385c;
+  color: white;
+  border: none;
+  border-radius: 50%;
+  width: 48px;
+  height: 48px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-left: 10px;
+}
+
+.btn-search:hover {
+  background-color: #e00040;
+  color: white;
+}
+
+.navbar-nav{
+
+display: flex;
+gap: 20px;
+
+}
+</style>
+
+
+
+
+
+
+
+<header>
+  <nav class="navbar navbar-expand airbnb-navbar">
+    <div class="container-fluid px-3">
+      <a class="navbar-brand mb-2 logo" href="/listings">
+        <i class="fa-regular fa-compass"></i>
+        <span class="logo-text">airbnb</span>
+      </a>
+
+      <!-- Top Navigation Tabs -->
+      <ul class="navbar-nav mx-auto">
+        <li class="nav-item"><a class="nav-link px-2" href="/listings"><i class="fa-solid fa-house"></i>Homes</a></li>
+        <li class="nav-item"><a class="nav-link px-2" href="#"><i class="fa-solid fa-wand-magic-sparkles"></i>Experiences</a></li>
+        <li class="nav-item"><a class="nav-link px-2" href="#"><i class="fa-solid fa-concierge-bell"></i>Services</a></li>
+      </ul>
+
+      <!-- Right: User Controls -->
+      <div class="d-flex align-items-center gap-2 d-none d-sm-flex">
+        <a href="/listings/new" class="btn btn-outline-secondary" style="border:none; color: black; font-weight: bold; font-size: 0.8rem;">Switch to hosting</a>
+        <button class="btn btn-light rounded-circle px-2 py-1">
+          <i class="fa-solid fa-globe"></i>
+        </button>
+
+        <div class="dropdown">
+             <button class="btn btn-light border rounded-pill px-2 py-1 d-flex align-items-center gap-1"
+                type="button" data-bs-toggle="dropdown" aria-expanded="false">
+          <i class="fa-solid fa-bars"></i><i class="fa-solid fa-user-circle fa-lg"></i>
+        </button>
+        <ul class="dropdown-menu dropdown-menu-end">
+          <% if (!currUser  ) { %>
+            <li><a class="dropdown-item" href="/login">Log in</a></li>
+            <li><a class="dropdown-item" href="/signup">Sign up</a></li>
+          <% } else { %>
+            <li><a class="dropdown-item" href="/profile">Profile</a></li>
+            <li><a class="dropdown-item" href="/listings/new">Airbnb your home</a></li>
+            <li><a class="dropdown-item" href="/trips">trip</a></li>
+            <li><hr class="dropdown-divider"></li>
+            <li><a class="dropdown-item" href="/logout">Log out</a></li>
+          <% } %>
+        </ul>
+
+         
+        </div>
+      </div>
+    </div>
+  </nav>
+
+
+
+
+
+   <% if (path !== '/signup' && path !== '/login' && path !== '/listings/new' && path !== '/profile' && path !== '/trips') { %>
+  <!-- Big single destination search bar -->
+  <div class="airbnb-search-section">
+    <form class="airbnb-search-form" role="search" method="GET" action="/listings">
+      <input
+        class="search-inp"
+        type="text"
+        placeholder="Search destinations"
+        name="country"
+        value=""
+      >
+      <button class="btn-search" type="submit">
+        <i class="fa-solid fa-magnifying-glass"></i>
+      </button>
+    </form>
+  </div>
+
+  <% } %>
+</header>
